@@ -13,21 +13,23 @@ using System.Threading.Tasks;
 class OllamaInterface {
 	private const int PORT = 11434;
 	private const string HOST = "localhost";
+	public TcpClient client;
 
 	static void Main(string[] args) {
 		Console.WriteLine("Enter your prompt (or 'exit' to quit):");
+		OllamaInterface ollamaInterface = new OllamaInterface();
 		while (true) {
 			string input = Console.ReadLine();
 			if (string.IsNullOrEmpty(input) || input.ToLower() == "exit")
 				break;
-			Task task = Ask(input, "deepseek-r1:7b", Console.Write, () => { Console.WriteLine("\n"); }, Console.Error.WriteLine);
+			Task task = ollamaInterface.Ask(input, "deepseek-r1:7b", Console.Write, () => { Console.WriteLine("\n"); }, Console.Error.WriteLine);
 			if (!task.IsCompleted) { Console.Write("."); Thread.Sleep(1); }
 		}
 	}
 
-	public static async Task Ask(string question, string model, Action<string> onResponse, Action onFinish, Action<string> onError) {
+	public async Task Ask(string question, string model, Action<string> onResponse, Action onFinish, Action<string> onError) {
 		try {
-			TcpClient client = await SendQuestionToOllama(question, model, onError);
+			client = await SendQuestionToOllama(question, model, onError);
 			if (client == null) { return; }
 			NetworkStream stream = client.GetStream();
 			await ProcessResponse(stream, onResponse, onError);

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class BlinkController : MonoBehaviour {
 	public bool blinkAll;
-	public Blinker[] blinkers;
+	public TransformAdjust[] blinkers;
 
 	private void OnValidate() {
 		if (!blinkAll) { return; }
@@ -13,14 +13,14 @@ public class BlinkController : MonoBehaviour {
 
 	public void BlinkAllBlinkers() {
 		ForEachBlinker(b => {
-			b.BlinkAgain();
-			b.ContinueBlinking();
+			b.DoActivateTrigger();
+			b.ContinueAdjusting();
 		});
 	}
 
-	public void ForEachBlinker(Action<Blinker> action) {
+	public void ForEachBlinker(Action<TransformAdjust> action) {
 		for (int i = 0; i < blinkers.Length; ++i) {
-			Blinker b = blinkers[i];
+			TransformAdjust b = blinkers[i];
 			if (b == null) {
 				continue;
 			}
@@ -29,10 +29,10 @@ public class BlinkController : MonoBehaviour {
 	}
 
 	public void BlinkAgain() {
-		ForEachBlinker(b => b.BlinkAgain());
+		ForEachBlinker(b => b.DoActivateTrigger());
 	}
 
 	public void StopBlinking() {
-		ForEachBlinker(b => b.StopBlinking());
+		ForEachBlinker(b => b.StopRepeating());
 	}
 }
