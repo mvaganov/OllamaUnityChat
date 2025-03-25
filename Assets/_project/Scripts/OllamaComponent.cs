@@ -55,6 +55,9 @@ public class OllamaComponent : MonoBehaviour {
 
 	[ContextMenu(nameof(SendMessage))]
 	public void SendMessage() {
+		if (string.IsNullOrEmpty(message)) {
+			return;
+		}
 		thread = new Thread(SeparateSocketThreadToPreventEditorCrash);
 		thread.Start();
 	}

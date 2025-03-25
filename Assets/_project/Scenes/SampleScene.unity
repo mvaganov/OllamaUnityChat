@@ -237,12 +237,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83b0c47aacdabb545800c20da99cb40f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AdjustKind: 1
   Duration: 0.25
+  AdjustKind: 1
   Start: {x: 0.2, y: 0.02, z: 0.02}
   End: {x: 0.2, y: 0.1, z: 0.02}
   _repetitions: 0
-  MaxDurationWithoutBlink: 0
   AlsoUndoAdjustment: 1
   label: mouth
 --- !u!65 &122967235
@@ -549,7 +548,8 @@ MonoBehaviour:
   message: 
   sendMessage: 0
   cancelMessage: 0
-  result: "<think>\n\n</think>\n\nHello! How can I assist you today? \U0001F60A"
+  result: "<think>\n\n</think>\n\nYes, I can understand and communicate in Chinese!
+    How can I assist you today? \U0001F60A"
   model: deepseek-r1:7b
   textOutput: {fileID: 1647024717}
   onTextInput:
@@ -596,7 +596,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
+        m_CallState: 1
       - m_Target: {fileID: 712955123}
         m_TargetAssemblyTypeName: TransformAdjust, Assembly-CSharp
         m_MethodName: DoActivateTrigger
@@ -712,12 +712,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83b0c47aacdabb545800c20da99cb40f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AdjustKind: 1
   Duration: 0.125
+  AdjustKind: 1
   Start: {x: 0.2, y: 0.2, z: 0.02}
   End: {x: 0.2, y: 0.02, z: 0.02}
   _repetitions: 0
-  MaxDurationWithoutBlink: 5
   AlsoUndoAdjustment: 1
   label: 
 --- !u!135 &539011472
@@ -838,12 +837,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83b0c47aacdabb545800c20da99cb40f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AdjustKind: 1
   Duration: 0.125
+  AdjustKind: 1
   Start: {x: 0.2, y: 0.2, z: 0.02}
   End: {x: 0.2, y: 0.02, z: 0.02}
   _repetitions: 0
-  MaxDurationWithoutBlink: 5
   AlsoUndoAdjustment: 1
   label: 
 --- !u!135 &601468169
@@ -1026,7 +1024,7 @@ GameObject:
   - component: {fileID: 712955123}
   - component: {fileID: 712955122}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1040,7 +1038,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 712955117}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.38268346, y: 0, z: 0, w: 0.9238795}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1133,12 +1131,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83b0c47aacdabb545800c20da99cb40f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AdjustKind: 2
   Duration: 0.25
+  AdjustKind: 2
   Start: {x: 45, y: 0, z: 0}
   End: {x: 0, y: 0, z: 0}
   _repetitions: 0
-  MaxDurationWithoutBlink: 0
   AlsoUndoAdjustment: 0
   label: down
 --- !u!114 &712955123
@@ -1153,12 +1150,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83b0c47aacdabb545800c20da99cb40f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AdjustKind: 2
   Duration: 1
+  AdjustKind: 2
   Start: {x: 0, y: 0, z: 0}
   End: {x: 45, y: 0, z: 0}
   _repetitions: 0
-  MaxDurationWithoutBlink: 0
   AlsoUndoAdjustment: 0
   label: up
 --- !u!1 &963194225
@@ -1417,6 +1413,7 @@ GameObject:
   - component: {fileID: 1094551361}
   - component: {fileID: 1094551363}
   - component: {fileID: 1094551362}
+  - component: {fileID: 1094551364}
   m_Layer: 0
   m_Name: ChatBox
   m_TagString: Untagged
@@ -1452,7 +1449,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62ef5c3bcd4f0254daf46f346637f167, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blinkAll: 0
+  activate: 0
   blinkers:
   - {fileID: 122967234}
 --- !u!114 &1094551363
@@ -1467,10 +1464,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62ef5c3bcd4f0254daf46f346637f167, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blinkAll: 0
+  activate: 0
   blinkers:
   - {fileID: 539011471}
   - {fileID: 601468168}
+--- !u!114 &1094551364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1094551360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0cb6ee65afbae546a3bbd382ea2805e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxDurationWithoutActivation: 5
+  WhatToDo:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1094551363}
+        m_TargetAssemblyTypeName: BlinkController, Assembly-CSharp
+        m_MethodName: BlinkAllBlinkers
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
 --- !u!1 &1326196123
 GameObject:
   m_ObjectHideFlags: 0
@@ -1619,7 +1644,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "<think>\n\n</think>\n\nHello! How can I assist you today? \U0001F60A"
+  m_text: "<think>\n\n</think>\n\nYes, I can understand and communicate in Chinese!
+    How can I assist you today? \U0001F60A"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

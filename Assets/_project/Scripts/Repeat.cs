@@ -3,9 +3,9 @@ using UnityEngine.Events;
 
 [ExecuteInEditMode]
 public class Repeat : MonoBehaviour {
-	public float MaxDurationWithoutBlink = 5;
+	public float MaxDurationWithoutActivation = 5;
 	public UnityEvent WhatToDo;
-	private int _timeAdjustmentStarted;
+	private int _timeOfActivation;
 
 	private void OnValidate() {
 		AdditionalEditorSpecificRefresh();
@@ -17,9 +17,9 @@ public class Repeat : MonoBehaviour {
 	}
 
 	void UpdateTimer() {
-		int msSinceLastBlink = System.Environment.TickCount - _timeAdjustmentStarted;
-		float secondsSinceLastBlink = msSinceLastBlink / 1000f;
-		if (MaxDurationWithoutBlink > 0 && secondsSinceLastBlink >= MaxDurationWithoutBlink) {
+		int msSinceLastActivation = System.Environment.TickCount - _timeOfActivation;
+		float secondsSinceLastActivation = msSinceLastActivation / 1000f;
+		if (MaxDurationWithoutActivation > 0 && secondsSinceLastActivation >= MaxDurationWithoutActivation) {
 			DoActivateTrigger();
 		}
 		if (enabled) {
@@ -27,8 +27,9 @@ public class Repeat : MonoBehaviour {
 		}
 	}
 
+	[ContextMenu(nameof(DoActivateTrigger))]
 	public void DoActivateTrigger() {
-		_timeAdjustmentStarted = System.Environment.TickCount;
+		_timeOfActivation = System.Environment.TickCount;
 		WhatToDo.Invoke();
 	}
 

@@ -2,12 +2,12 @@ using System;
 using UnityEngine;
 
 public class BlinkController : MonoBehaviour {
-	public bool blinkAll;
+	public bool activate;
 	public TransformAdjust[] blinkers;
 
 	private void OnValidate() {
-		if (!blinkAll) { return; }
-		blinkAll = false;
+		if (!activate) { return; }
+		activate = false;
 		BlinkAllBlinkers();
 	}
 

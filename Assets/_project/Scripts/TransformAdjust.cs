@@ -5,8 +5,8 @@ public class TransformAdjust : MonoBehaviour {
 	public enum State { None, Adjusting, Unadjusting }
 	public enum Kind { None, Scale, EulerRotation, Position }
 
-	public Kind AdjustKind = Kind.Scale;
 	public float Duration = 0.25f;
+	public Kind AdjustKind = Kind.Scale;
 	public Vector3 Start;
 	public Vector3 End;
 	protected int _timeAdjustmentStarted;
@@ -45,16 +45,16 @@ public class TransformAdjust : MonoBehaviour {
 
 	public void ContinueAdjusting() {
 		if (!enabled) { return; }
-		bool isBlinking = UpdateOverTime();
+		bool isActivating = UpdateOverTime();
 #if UNITY_EDITOR
-		if (isBlinking) {
+		if (isActivating) {
 			AdditionalEditorSpecificRefresh();
 		}
 #endif
 		if (_repetitions <= 0) {
 			return;
 		}
-		if (!isBlinking) {
+		if (!isActivating) {
 			--_repetitions;
 			StartAdjusting();
 		}
@@ -111,8 +111,16 @@ public class TransformAdjust : MonoBehaviour {
 		}
 	}
 
+	[ContextMenu(nameof(DoActivateTrigger))]
 	public void DoActivateTrigger() {
-		++_repetitions;
+		if (IsChangeHappening) {
+			++_repetitions;
+		} else {
+			StartAdjusting();
+		}
+#if UNITY_EDITOR
+		AdditionalEditorSpecificRefresh();
+#endif
 	}
 
 	public void StopRepeating() {
